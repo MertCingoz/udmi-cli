@@ -59,7 +59,7 @@ gcloud iot devices create $GOOGLE_CLOUD_REGISTRY \
     --public-key path=./sites/udmi_site_model/devices/AHU-1/rsa_public.pem,type=rsa-pem
 ```
 
-### re-Deploy functions with firebase
+### re-Deploy functions with firebase then gcloud
 ```
 cd dashboard/functions
 npm ci
@@ -67,13 +67,31 @@ cd /app
 
 firebase login --no-localhost
 dashboard/deploy_dashboard_firebase $GOOGLE_CLOUD_PROJECT
+
+# https://github.com/faucetsdn/udmi/issues/316
+dashboard/deploy_dashboard_gcloud $GOOGLE_CLOUD_PROJECT
+```
+
+### Reset Device config
+```
+bin/reset_config sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1
+bin/reset_config sites/udmi_site_model $GOOGLE_CLOUD_PROJECT GAT-123
 ```
 
 ### Pubber
 ```
 bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123
 bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123 extra_field
-bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT GAT-123 123
+
+bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT GAT-123 456
+```
+
+### Sequencer
+```
+bin/sequencer -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123
+bin/sequencer -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123 broken_config
+
+bin/sequencer -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT GAT-123 456
 ```
 
 ### Validator
@@ -81,15 +99,17 @@ bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT GAT-123 123
 bin/validator sites/udmi_site_model $GOOGLE_CLOUD_PROJECT udmi_target_subscription
 ```
 
-### Sequencer with pubber
+### Integration tests
 ```
 bin/test_sequencer $GOOGLE_CLOUD_PROJECT
+bin/test_validator $GOOGLE_CLOUD_PROJECT
 ```
 
-### Sequencer and pubber
+### Kill pids
 ```
-bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123
-bin/sequencer -vv sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123
+ps ax | fgrep pubber | fgrep java | awk '{print $1}' | while read pid; do kill $pid; done;
+ps ax | fgrep validator | fgrep java | awk '{print $1}' | while read pid; do kill $pid; done;
+ps ax | fgrep sequencer | fgrep java | awk '{print $1}' | while read pid; do kill $pid; done;
 ```
 
 ### Clean gcloud resources
