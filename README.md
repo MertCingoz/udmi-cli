@@ -29,16 +29,24 @@ gcloud services enable cloudbuild.googleapis.com cloudfunctions.googleapis.com c
 git clone https://github.com/faucetsdn/udmi.git .
 
 dashboard/deploy_dashboard_gcloud $GOOGLE_CLOUD_PROJECT
+gcloud pubsub subscriptions create udmi_target_subscription --topic=udmi_target
 
 gcloud iot registries create $GOOGLE_CLOUD_REGISTRY \
     --region=$GOOGLE_CLOUD_REGION \
     --project=$GOOGLE_CLOUD_PROJECT \
-    --enable-http-config=false \
     --event-notification-config=topic=udmi_target \
     --state-pubsub-topic=udmi_state
-    
-gcloud pubsub subscriptions create udmi_target_subscription --topic=udmi_target
+```
 
+### Register test devices
+```
+bin/clone_model
+bin/genkeys sites/udmi_site_model
+bin/registrar sites/udmi_site_model $GOOGLE_CLOUD_PROJECT
+```
+
+### Deploy reflect resources
+```
 gcloud iot registries create UDMS-REFLECT \
     --region=$GOOGLE_CLOUD_REGION \
     --project=$GOOGLE_CLOUD_PROJECT \
@@ -51,11 +59,14 @@ gcloud iot devices create $GOOGLE_CLOUD_REGISTRY \
     --public-key path=./sites/udmi_site_model/devices/AHU-1/rsa_public.pem,type=rsa-pem
 ```
 
-### Register test devices
+### re-Deploy functions with firebase
 ```
-bin/clone_model
-bin/genkeys sites/udmi_site_model
-bin/registrar sites/udmi_site_model $GOOGLE_CLOUD_PROJECT
+cd dashboard/functions
+npm ci
+cd /app
+
+firebase login --no-localhost
+dashboard/deploy_dashboard_firebase $GOOGLE_CLOUD_PROJECT
 ```
 
 ### Pubber
