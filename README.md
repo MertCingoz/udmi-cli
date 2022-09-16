@@ -59,16 +59,8 @@ gcloud iot devices create $GOOGLE_CLOUD_REGISTRY \
     --public-key path=./sites/udmi_site_model/devices/AHU-1/rsa_public.pem,type=rsa-pem
 ```
 
-### re-Deploy functions with firebase then gcloud
+### re-Deploy functions
 ```
-cd dashboard/functions
-npm ci
-cd /app
-
-firebase login --no-localhost
-dashboard/deploy_dashboard_firebase $GOOGLE_CLOUD_PROJECT
-
-# https://github.com/faucetsdn/udmi/issues/316
 dashboard/deploy_dashboard_gcloud $GOOGLE_CLOUD_PROJECT
 ```
 
