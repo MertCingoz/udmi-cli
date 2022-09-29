@@ -3,7 +3,8 @@ Docker image and instructions to use [UDMI](https://github.com/faucetsdn/udmi) t
 ### Usage
 change docker-compose.yml -> **GOOGLE_CLOUD_PROJECT** environment variable with your project id
 ```sh
-mkdir udmi
+mkdir -p ~/.config
+mkdir -p  udmi
 docker-compose up -d
 docker-compose exec tools /bin/bash
 git clone https://github.com/faucetsdn/udmi.git .
@@ -15,6 +16,7 @@ git clone https://github.com/faucetsdn/udmi.git .
 ```sh
 bin/reset_config sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1
 bin/reset_config sites/udmi_site_model $GOOGLE_CLOUD_PROJECT GAT-123
+bin/reset_config sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-22
 ```
 
 ### Pubber
@@ -22,7 +24,7 @@ bin/reset_config sites/udmi_site_model $GOOGLE_CLOUD_PROJECT GAT-123
 bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123
 bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123 extra_field
 
-bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT GAT-123 456
+bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-22 456
 ```
 
 ### Sequencer
@@ -30,7 +32,7 @@ bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT GAT-123 456
 bin/sequencer -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123
 bin/sequencer -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123 broken_config
 
-bin/sequencer -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT GAT-123 456
+bin/sequencer -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-22 456
 ```
 
 ### Validator
