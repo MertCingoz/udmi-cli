@@ -61,5 +61,10 @@ gcloud iot devices gateways list-bound-devices --gateway=GAT-123 --region=$GOOGL
 gcloud iot devices list --region=$GOOGLE_CLOUD_REGION --registry=$GOOGLE_CLOUD_REGISTRY | tail -n +2 | awk '{ print $1 }' | while read line; do echo 'Y' | gcloud iot devices delete $line --region=$GOOGLE_CLOUD_REGION --registry=$GOOGLE_CLOUD_REGISTRY; done;
 gcloud iot devices list --region=$GOOGLE_CLOUD_REGION --registry=UDMS-REFLECT | tail -n +2 | awk '{ print $1 }' | while read line; do echo 'Y' | gcloud iot devices delete $line --region=$GOOGLE_CLOUD_REGION --registry=UDMS-REFLECT; done;
 gcloud iot registries list --region=$GOOGLE_CLOUD_REGION | tail -n +2 | awk '{ print $1 }' | while read line; do echo 'Y' | gcloud iot registries delete $line --region=$GOOGLE_CLOUD_REGION; done;
+```
+
+### Delete
+```sh
+echo 'Y' | gcloud projects delete $GOOGLE_CLOUD_PROJECT
 rm -rf * .[^.]*
 ```
