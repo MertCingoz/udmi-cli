@@ -14,9 +14,14 @@ gcloud config set project $GOOGLE_CLOUD_PROJECT
 gcloud services enable cloudbuild.googleapis.com cloudfunctions.googleapis.com cloudiot.googleapis.com
 ```
 
+```sh
+chmod +x udmis/deploy_udmis_gcloud
+mkdir udmis/public
+```
+
 ### Deploy gcloud resources
 ```sh
-dashboard/deploy_dashboard_gcloud $GOOGLE_CLOUD_PROJECT
+udmis/deploy_udmis_gcloud $GOOGLE_CLOUD_PROJECT
 gcloud pubsub subscriptions create udmi_target_subscription --topic=udmi_target
 
 gcloud iot registries create $GOOGLE_CLOUD_REGISTRY \
@@ -49,7 +54,7 @@ gcloud iot devices create $GOOGLE_CLOUD_REGISTRY \
 
 ### re-Deploy functions
 ```sh
-dashboard/deploy_dashboard_gcloud $GOOGLE_CLOUD_PROJECT
+udmis/deploy_udmis_gcloud $GOOGLE_CLOUD_PROJECT
 ```
 
 ### Clean gcloud resources
