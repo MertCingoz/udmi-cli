@@ -14,11 +14,6 @@ gcloud config set project $GOOGLE_CLOUD_PROJECT
 gcloud services enable cloudbuild.googleapis.com cloudfunctions.googleapis.com cloudiot.googleapis.com
 ```
 
-```sh
-chmod +x udmis/deploy_udmis_gcloud
-mkdir udmis/public
-```
-
 ### Deploy gcloud resources
 ```sh
 udmis/deploy_udmis_gcloud $GOOGLE_CLOUD_PROJECT
