@@ -4,6 +4,7 @@ services:
   tools:
     build: .
     image: mertcingoz/udmi-cli
+    platform: linux/amd64
     stdin_open: true
     tty: true
     working_dir: /app
@@ -15,6 +16,8 @@ services:
         source: ~/.config
         target: /root/.config
     environment:
-      GOOGLE_CLOUD_PROJECT: udmi-demo-01
+      GOOGLE_CLOUD_PROJECT: udmi-mango-test
       GOOGLE_CLOUD_REGION: us-central1
       GOOGLE_CLOUD_REGISTRY: ZZ-TRI-FECTA
+      UDMI_TAG: master
+      UDMI_VERSION: a158540 #Oct 22, 2022

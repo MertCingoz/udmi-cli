@@ -16,7 +16,7 @@ gcloud services enable cloudbuild.googleapis.com cloudfunctions.googleapis.com c
 
 ### Deploy gcloud resources
 ```sh
-udmis/deploy_udmis_gcloud $GOOGLE_CLOUD_PROJECT
+dashboard/deploy_dashboard_gcloud $GOOGLE_CLOUD_PROJECT
 gcloud pubsub subscriptions create udmi_target_subscription --topic=udmi_target
 
 gcloud iot registries create $GOOGLE_CLOUD_REGISTRY \
@@ -49,7 +49,7 @@ gcloud iot devices create $GOOGLE_CLOUD_REGISTRY \
 
 ### re-Deploy functions
 ```sh
-udmis/deploy_udmis_gcloud $GOOGLE_CLOUD_PROJECT
+dashboard/deploy_dashboard_gcloud $GOOGLE_CLOUD_PROJECT
 ```
 
 ### Clean gcloud resources

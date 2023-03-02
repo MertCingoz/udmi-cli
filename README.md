@@ -5,9 +5,11 @@ change docker-compose.yml -> **GOOGLE_CLOUD_PROJECT** environment variable with 
 ```sh
 mkdir -p ~/.config
 mkdir -p  udmi
-docker-compose up -d
+docker-compose pull
+docker-compose up -d --no-build
 docker-compose exec tools /bin/bash
-git clone https://github.com/faucetsdn/udmi.git .
+git clone --branch $UDMI_TAG https://github.com/faucetsdn/udmi.git .
+git reset $UDMI_VERSION --hard
 ```
 
 ### [Setup gcloud](gcloud.md)
