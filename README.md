@@ -9,7 +9,7 @@ docker-compose pull
 docker-compose up -d --no-build
 docker-compose exec tools /bin/bash
 git clone --branch $UDMI_TAG https://github.com/faucetsdn/udmi.git .
-git reset $UDMI_VERSION --hard
+git checkout --detach $UDMI_VERSION
 ```
 
 ### [Setup gcloud](gcloud.md)
