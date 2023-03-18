@@ -54,28 +54,29 @@ dashboard/deploy_dashboard_gcloud $GOOGLE_CLOUD_PROJECT
 
 ### Clean gcloud resources
 ```sh
-gcloud functions list | tail -n +2 | awk '{ print $1 }' | while read line; do \
-  echo 'Y' | gcloud functions delete $line; \
+gcloud functions list | tail -n +2 | awk '{ print $1 }' | while read function; do \
+  echo 'Y' | gcloud functions delete $function; \
 done;
-gcloud pubsub topics list | grep -o 'projects/.*' | while read line; do \
-  gcloud pubsub topics delete $line; \
+
+gcloud pubsub topics list | grep -o 'projects/.*' | while read topic; do \
+  gcloud pubsub topics delete $topic; \
 done;
-gcloud pubsub subscriptions list | grep -o "projects/${GOOGLE_CLOUD_PROJECT}/subscriptions/.*" | while read line; do \
-  gcloud pubsub subscriptions delete $line; \
+
+gcloud pubsub subscriptions list | grep -o "projects/${GOOGLE_CLOUD_PROJECT}/subscriptions/.*" | while read subscription; do \
+  gcloud pubsub subscriptions delete $subscription; \
 done;
+
 gcloud iot devices list --region=$GOOGLE_CLOUD_REGION --registry=$GOOGLE_CLOUD_REGISTRY | tail -n +2 | awk '{ if($3 == "GATEWAY") {print $1 } }' | while read gateway; do \
   gcloud iot devices gateways list-bound-devices --gateway=$gateway --region=$GOOGLE_CLOUD_REGION --registry=$GOOGLE_CLOUD_REGISTRY | tail -n +2 | awk '{ print $1 }' | while read line; do \
       echo 'Y' | gcloud iot devices gateways unbind --device=$line --gateway=$gateway --gateway-region=$GOOGLE_CLOUD_REGION --gateway-registry=$GOOGLE_CLOUD_REGISTRY --device-registry=$GOOGLE_CLOUD_REGISTRY --device-region=$GOOGLE_CLOUD_REGION;
   done; \
 done;
-gcloud iot devices list --region=$GOOGLE_CLOUD_REGION --registry=$GOOGLE_CLOUD_REGISTRY | tail -n +2 | awk '{ print $1 }' | while read line; do \
-  echo 'Y' | gcloud iot devices delete $line --region=$GOOGLE_CLOUD_REGION --registry=$GOOGLE_CLOUD_REGISTRY; \
-done;
-gcloud iot devices list --region=$GOOGLE_CLOUD_REGION --registry=UDMS-REFLECT | tail -n +2 | awk '{ print $1 }' | while read line; do \
-  echo 'Y' | gcloud iot devices delete $line --region=$GOOGLE_CLOUD_REGION --registry=UDMS-REFLECT; \
-done;
-gcloud iot registries list --region=$GOOGLE_CLOUD_REGION | tail -n +2 | awk '{ print $1 }' | while read line; do \
-  echo 'Y' | gcloud iot registries delete $line --region=$GOOGLE_CLOUD_REGION; \
+
+gcloud iot registries list --region=$GOOGLE_CLOUD_REGION | tail -n +2 | awk '{ print $1 }' | while read registry; do \
+  gcloud iot devices list --region=$GOOGLE_CLOUD_REGION --registry=$registry | tail -n +2 | awk '{ print $1 }' | while read device; do \
+    echo 'Y' | gcloud iot devices delete $device --region=$GOOGLE_CLOUD_REGION --registry=$registry; \
+  done; \
+  echo 'Y' | gcloud iot registries delete $registry --region=$GOOGLE_CLOUD_REGION; \
 done;
 ```
 
