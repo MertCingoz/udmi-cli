@@ -15,6 +15,9 @@ services:
       - type: bind
         source: ~/.config
         target: /root/.config
+      - type: bind
+        source: scripts
+        target: /scripts
     environment:
       GOOGLE_CLOUD_PROJECT: udmi-mango-test
       GOOGLE_CLOUD_REGION: us-central1

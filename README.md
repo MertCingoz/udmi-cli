@@ -4,15 +4,20 @@ Docker image and instructions to use [UDMI](https://github.com/faucetsdn/udmi) t
 change docker-compose.yml -> **GOOGLE_CLOUD_PROJECT** environment variable with your project id
 ```sh
 mkdir -p ~/.config
-mkdir -p  udmi
+mkdir -p udmi
 docker-compose pull
 docker-compose up -d --no-build
 docker-compose exec tools /bin/bash
-git clone --branch $UDMI_TAG https://github.com/faucetsdn/udmi.git .
-git checkout --detach $UDMI_VERSION
 ```
 
-### [Setup gcloud](gcloud.md)
+### Scripts
+```sh
+/scripts/clone.sh
+/scripts/configure.sh
+/scripts/deploy.sh
+#/scripts/clean.sh
+#/scripts/remove.sh
+```
 
 ### Reset Device config
 ```sh
@@ -50,7 +55,5 @@ bin/test_validator $GOOGLE_CLOUD_PROJECT
 
 ### Kill pids
 ```sh
-ps ax | fgrep pubber | fgrep java | awk '{print $1}' | while read pid; do kill $pid; done;
-ps ax | fgrep validator | fgrep java | awk '{print $1}' | while read pid; do kill $pid; done;
-ps ax | fgrep sequencer | fgrep java | awk '{print $1}' | while read pid; do kill $pid; done;
+/script/kill.sh
 ```
