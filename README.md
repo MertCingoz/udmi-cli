@@ -16,7 +16,7 @@ docker-compose exec tools /bin/bash
 /scripts/configure.sh
 /scripts/deploy.sh
 #/scripts/clean.sh
-#/scripts/remove.sh
+#/scripts/delete.sh
 ```
 
 ### Reset Device config

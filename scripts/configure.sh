@@ -11,8 +11,10 @@ billingUrl=https://console.cloud.google.com/billing
 printf "\nCreate billing account -> %s\n" "$billingUrl"
 printf "Press enter to continue"
 read -r _key
+(gcloud alpha billing accounts list --format json | jq) || true
 printf "\nLink billing account to project:%s -> %s/projects\n" "$GOOGLE_CLOUD_PROJECT" "$billingUrl"
 printf "Press enter to continue"
 read -r _key
+(gcloud beta billing projects describe "$GOOGLE_CLOUD_PROJECT" --format json | jq) || true
 
 gcloud services enable cloudbuild.googleapis.com cloudfunctions.googleapis.com cloudiot.googleapis.com
