@@ -10,13 +10,27 @@ docker-compose up -d --no-build
 docker-compose exec tools /bin/bash
 ```
 
-### Scripts
+### UDMI
 ```sh
 /scripts/clone.sh
+```
+
+### Gcloud
+```sh
 /scripts/configure.sh
 /scripts/deploy.sh
+#/scripts/deploy.sh --firebase
 #/scripts/clean.sh
 #/scripts/delete.sh
+```
+
+### Site model
+```sh
+/scripts/register.sh
+/scripts/register.sh --clean
+#/scripts/unregister.sh
+#/scripts/unregister.sh "$GOOGLE_CLOUD_REGISTRY"
+#/scripts/unregister.sh "$UDMI_ALT_REGISTRY"
 ```
 
 ### Reset Device config
@@ -36,10 +50,10 @@ bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-22 456
 
 ### Sequencer
 ```sh
-bin/sequencer -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123
-bin/sequencer -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123 broken_config
+bin/sequencer -a -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123
+bin/sequencer -a -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123 broken_config
 
-bin/sequencer -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-22 456
+bin/sequencer -a -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-22 456
 ```
 
 ### Validator
@@ -56,4 +70,10 @@ bin/test_validator $GOOGLE_CLOUD_PROJECT
 ### Kill pids
 ```sh
 /script/kill.sh
+```
+
+### Get function logs
+```sh
+gcloud functions logs read --limit 100
+gcloud functions logs read --filter system --limit 100
 ```
