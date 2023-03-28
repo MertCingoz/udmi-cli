@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -o errexit -o nounset
 
 if [ $# -ge 1 ]; then
