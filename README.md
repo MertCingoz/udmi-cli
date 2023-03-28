@@ -35,41 +35,30 @@ docker-compose exec tools /bin/bash
 
 ### Reset Device config
 ```sh
-bin/reset_config sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1
-bin/reset_config sites/udmi_site_model $GOOGLE_CLOUD_PROJECT GAT-123
-bin/reset_config sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-22
+/scripts/udmi.sh reset_config AHU-1
 ```
 
 ### Pubber
 ```sh
-bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123
-bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123 extra_field
-
-bin/pubber sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-22 456
-```
-
-### Sequencer
-```sh
-bin/sequencer -a -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123
-bin/sequencer -a -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-1 123 broken_config
-
-bin/sequencer -a -v sites/udmi_site_model $GOOGLE_CLOUD_PROJECT AHU-22 456
+/scripts/udmi.sh pubber AHU-1
+#/scripts/udmi.sh pubber AHU-1 extra_field
 ```
 
 ### Validator
 ```sh
-bin/validator sites/udmi_site_model $GOOGLE_CLOUD_PROJECT udmi_target_subscription
+/scripts/udmi.sh validator
 ```
 
-### Integration tests
+### Sequencer
 ```sh
-bin/test_sequencer $GOOGLE_CLOUD_PROJECT
-bin/test_validator $GOOGLE_CLOUD_PROJECT
+/scripts/udmi.sh sequencer -a AHU-1
+#/scripts/udmi.sh sequencer AHU-1
+#/scripts/udmi.sh sequencer AHU-1 broken_config
 ```
 
 ### Kill pids
 ```sh
-/script/kill.sh
+/script/udmi.sh kill
 ```
 
 ### Get function logs
