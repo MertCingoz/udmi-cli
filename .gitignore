@@ -1,3 +1,9 @@
-udmi/
-.idea/
-learning/
+/.idea
+/learning
+/udmi
+
+/gradle
+/.gradle
+/settings.gradle
+/gradlew.bat
+/gradlew
