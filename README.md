@@ -26,7 +26,7 @@ docker-compose exec tools /bin/bash
 
 ### Site model
 ```sh
-/scripts/register.sh
+/scripts/register.sh --block
 /scripts/register.sh --clean
 #/scripts/unregister.sh
 #/scripts/unregister.sh "$GOOGLE_CLOUD_REGISTRY"

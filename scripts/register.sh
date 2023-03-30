@@ -2,9 +2,11 @@
 set -o errexit -o nounset
 
 if [ $# -ge 1 ]; then
-  script_dir=$(dirname "$0")
-  "$script_dir"/unregister.sh "$GOOGLE_CLOUD_REGISTRY"
-  "$script_dir"/unregister.sh "$UDMI_ALT_REGISTRY"
+  if [ "$1" = "--clean" ]; then
+    script_dir=$(dirname "$0")
+    "$script_dir"/unregister.sh "$GOOGLE_CLOUD_REGISTRY"
+    "$script_dir"/unregister.sh "$UDMI_ALT_REGISTRY"
+  fi
 fi
 
 site=sites/udmi_site_model

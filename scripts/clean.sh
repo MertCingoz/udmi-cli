@@ -18,6 +18,8 @@ done
 "$script_dir"/unregister.sh "$GOOGLE_CLOUD_REGISTRY"
 "$script_dir"/unregister.sh "$UDMI_ALT_REGISTRY"
 "$script_dir"/unregister.sh "UDMS-REFLECT"
-echo 'Y' | gcloud iot registries delete "$GOOGLE_CLOUD_REGISTRY" --region="$GOOGLE_CLOUD_REGION"
-echo 'Y' | gcloud iot registries delete "$UDMI_ALT_REGISTRY" --region="$GOOGLE_CLOUD_REGION"
-echo 'Y' | gcloud iot registries delete "UDMS-REFLECT" --region="$GOOGLE_CLOUD_REGION"
+
+gcloud iot registries list --region="$GOOGLE_CLOUD_REGION" | tail -n +2 | awk '{ print $1 }' | \
+grep -x -e "$GOOGLE_CLOUD_REGISTRY" -e "$UDMI_ALT_REGISTRY" -e "UDMS-REFLECT" | while read -r registry; do
+  echo 'Y' | gcloud iot registries delete "$registry" --region="$GOOGLE_CLOUD_REGION"
+done
