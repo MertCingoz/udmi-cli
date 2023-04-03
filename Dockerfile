@@ -8,5 +8,5 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
   procps \
   iproute2 \
   coreutils \
-  openjdk-11-jdk \
+  openjdk-11-jdk-headless \
   && rm -rf /var/lib/apt/lists/*
