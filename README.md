@@ -54,11 +54,22 @@ docker-compose exec tools /bin/bash
 /scripts/udmi.sh sequencer -a AHU-1
 #/scripts/udmi.sh sequencer AHU-1
 #/scripts/udmi.sh sequencer AHU-1 broken_config
+
+/scripts/udmi.sh sequencer -a MANGO-1
+#/scripts/udmi.sh sequencer MANGO-1 empty_enumeration
+#/scripts/udmi.sh sequencer MANGO-1 family_enumeration
+#/scripts/udmi.sh sequencer MANGO-1 family_ether_addr
+#/scripts/udmi.sh sequencer MANGO-1 family_ipv4_addr
+#/scripts/udmi.sh sequencer MANGO-1 family_ipv6_addr
+#/scripts/udmi.sh sequencer MANGO-1 feature_enumeration
+#/scripts/udmi.sh sequencer MANGO-1 multi_enumeration
+#/scripts/udmi.sh sequencer MANGO-1 periodic_scan
+#/scripts/udmi.sh sequencer MANGO-1 single_scan
 ```
 
 ### Kill pids
 ```sh
-/script/udmi.sh kill
+/scripts/udmi.sh kill
 ```
 
 ### Get function logs
