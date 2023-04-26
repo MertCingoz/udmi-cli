@@ -13,11 +13,11 @@ elif [ "$1" = "validator" ]; then
   bin/validator sites/udmi_site_model "$GOOGLE_CLOUD_PROJECT" udmi_target_subscription
 elif [ "$1" = "sequencer" ]; then
   if [ "$2" = "-a" ]; then
-    bin/sequencer -a -v sites/udmi_site_model "$GOOGLE_CLOUD_PROJECT" "$3" "$3"
+    bin/sequencer -a -vv sites/udmi_site_model "$GOOGLE_CLOUD_PROJECT" "$3" "$3"
   elif [ $# -ge 3 ]; then
-    bin/sequencer -v sites/udmi_site_model "$GOOGLE_CLOUD_PROJECT" "$2" "$2" "$3"
+    bin/sequencer -vv sites/udmi_site_model "$GOOGLE_CLOUD_PROJECT" "$2" "$2" "$3"
   else
-    bin/sequencer -v sites/udmi_site_model "$GOOGLE_CLOUD_PROJECT" "$2" "$2"
+    bin/sequencer -vv sites/udmi_site_model "$GOOGLE_CLOUD_PROJECT" "$2" "$2"
   fi
 elif [ "$1" = "kill" ]; then
   for process in pubber validator; do

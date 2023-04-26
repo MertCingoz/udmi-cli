@@ -36,6 +36,7 @@ docker-compose exec tools /bin/bash
 ### Reset Device config
 ```sh
 /scripts/udmi.sh reset_config AHU-1
+#/scripts/udmi.sh reset_config MANGO-1
 ```
 
 ### Pubber
