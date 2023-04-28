@@ -19,9 +19,9 @@ services:
         source: scripts
         target: /scripts
     environment:
+      UDMI_TAG: master
+      UDMI_VERSION: 1e70358 #April 12, 2023
       GOOGLE_CLOUD_PROJECT: udmi-mango-test
       GOOGLE_CLOUD_REGION: us-central1
       GOOGLE_CLOUD_REGISTRY: ZZ-TRI-FECTA
-      UDMI_TAG: master
-      UDMI_VERSION: 1e70358 #April 12, 2023
       UDMI_ALT_REGISTRY: ZZ-REDIRECT-NA
