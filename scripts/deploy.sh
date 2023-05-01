@@ -48,7 +48,7 @@ createReflectDevice() {
       --public-key path=./sites/udmi_site_model/devices/AHU-1/rsa_public.pem,type=rsa-pem
 }
 
-deployFunctions
+deployFunctions "$@"
 createSubscription
 createRegistry "$GOOGLE_CLOUD_REGISTRY"
 createRegistry "$UDMI_ALT_REGISTRY"
@@ -56,4 +56,4 @@ createRegistry "$UDMI_ALT_REGISTRY"
 createReflectRegistry "UDMS-REFLECT"
 createReflectDevice "$GOOGLE_CLOUD_REGISTRY" "UDMS-REFLECT"
 createReflectDevice "$UDMI_ALT_REGISTRY" "UDMS-REFLECT"
-deployFunctions
+deployFunctions "$@"

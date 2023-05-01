@@ -1,11 +1,16 @@
 Docker image and instructions to use [UDMI](https://github.com/faucetsdn/udmi) and [required tools](https://faucetsdn.github.io/udmi/docs/tools/) with minimal effort
 
 ### Usage
-Change docker-compose.yml environment variables for your project  
-*GOOGLE_CLOUD_PROJECT*  
-*GOOGLE_CLOUD_REGION*  
-*GOOGLE_CLOUD_REGISTRY*  
-*UDMI_ALT_REGISTRY*  
+
+#### Change variables in .env file based on your cloud
+```
+GOOGLE_CLOUD_PROJECT=
+GOOGLE_CLOUD_REGION=
+GOOGLE_CLOUD_REGISTRY=
+UDMI_ALT_REGISTRY=
+```
+
+#### Create required folders and connect to docker container
 
 ```sh
 mkdir -p ~/.config
@@ -15,12 +20,14 @@ docker-compose up -d --no-build
 docker-compose exec tools /bin/bash
 ```
 
-### UDMI
+### Inside the docker container
+
+#### Clone UDMI project
 ```sh
 /scripts/clone.sh
 ```
 
-### Gcloud
+#### Configure gcloud account and deploy required cloud resources 
 ```sh
 /scripts/configure.sh
 /scripts/deploy.sh
@@ -29,33 +36,35 @@ docker-compose exec tools /bin/bash
 #/scripts/delete.sh
 ```
 
-### Site model
+### [TOOLS](https://faucetsdn.github.io/udmi/docs/tools/)
+
+#### Site model (Registry operations)
 ```sh
 /scripts/register.sh --block
-/scripts/register.sh --clean
+#/scripts/register.sh --clean
 #/scripts/unregister.sh
 #/scripts/unregister.sh "$GOOGLE_CLOUD_REGISTRY"
 #/scripts/unregister.sh "$UDMI_ALT_REGISTRY"
 ```
 
-### Reset Device config
+#### Reset Device config (Reset device to registered config)
 ```sh
 /scripts/udmi.sh reset_config AHU-1
 #/scripts/udmi.sh reset_config MANGO-1
 ```
 
-### Pubber
+#### Pubber
 ```sh
 /scripts/udmi.sh pubber AHU-1
 #/scripts/udmi.sh pubber AHU-1 extra_field
 ```
 
-### Validator
+#### Validator
 ```sh
 /scripts/udmi.sh validator
 ```
 
-### Sequencer
+#### Sequencer
 ```sh
 /scripts/udmi.sh sequencer -a AHU-1
 #/scripts/udmi.sh sequencer AHU-1
@@ -92,13 +101,26 @@ docker-compose exec tools /bin/bash
 #/scripts/udmi.sh sequencer MANGO-1 pointset_sample_rate
 ```
 
-### Kill pids
+#### Kill hanging pubber, validator or sequencer processes
 ```sh
 /scripts/udmi.sh kill
 ```
 
-### Get function logs
+#### Get function logs from cloud
 ```sh
-gcloud functions logs read --limit 100
-gcloud functions logs read --filter system --limit 100
+/scripts/logs.sh functions 100
+/scripts/logs.sh functions 100 system
+```
+
+#### Get subscription logs from cloud
+```sh
+/scripts/logs.sh pubsub 100 MANGO-1
+/scripts/logs.sh pubsub 100 MANGO-1 config
+/scripts/logs.sh pubsub 100 MANGO-1 config discovery
+
+/scripts/logs.sh pubsub 100 MANGO-1 event
+/scripts/logs.sh pubsub 100 MANGO-1 event system
+
+/scripts/logs.sh pubsub 100 MANGO-1 state
+/scripts/logs.sh pubsub 100 MANGO-1 state pointset
 ```
