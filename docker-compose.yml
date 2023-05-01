@@ -20,7 +20,7 @@ services:
         target: /scripts
     environment:
       UDMI_TAG: master
-      UDMI_VERSION: 4132c83 #April 28, 2023
+      UDMI_VERSION: 4132c838 #April 28, 2023
       GOOGLE_CLOUD_PROJECT: ${GOOGLE_CLOUD_PROJECT}
       GOOGLE_CLOUD_REGION: ${GOOGLE_CLOUD_REGION}
       GOOGLE_CLOUD_REGISTRY: ${GOOGLE_CLOUD_REGISTRY}
