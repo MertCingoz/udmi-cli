@@ -127,7 +127,6 @@ docker-compose exec tools /bin/bash
 /scripts/logs.sh pubsub 100 MANGO-1 state pointset
 ```
 
-
 #### Migration tutorial (GCP to ClearBlade)
 https://clearblade.atlassian.net/wiki/spaces/IC/pages/2207449095/Migration+tutorial
 https://github.com/ClearBlade/clearblade-iot-core-migration
@@ -136,5 +135,6 @@ https://clearblade.atlassian.net/wiki/spaces/IC/pages/2210299905/Retargeting+dev
 https://clearblade.atlassian.net/wiki/spaces/IC/pages/2201059341/REST+reference
 
 ### TODO
+- Check what needs to be done for cloud functions and reflector ? setup for ClearBlade
 - validator (registrar, validator, sequencer) seems not working with ClearBlade at this moment
 - Update scripts to implement IOT_PROVIDER (ClearBlade) when it is documented
