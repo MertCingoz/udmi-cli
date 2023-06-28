@@ -28,11 +28,12 @@ sed '/private void familyAddr(String family) {/,/() -> expected.equals(actual));
     expectedFamilies.forEach(expectedFamily -> {\
       String expected = catchToNull(() -> deviceMetadata.localnet.families.get(expectedFamily).addr);\
       if (expected == null) {\
-        throw new SkipTest(String.format("No %S address defined in metadata", expectedFamily));\
+        throw new AssumptionViolatedException(\
+                format("No %S address defined in metadata", expected));\
       }\
       untilTrue("localnet families available", () -> deviceState.localnet.families.size() > 0);\
       String actual = catchToNull(() -> deviceState.localnet.families.get(expectedFamily).addr);\
-      checkThat(String.format("device %s address was %s, expected %s", expectedFamily, actual, expected),\
+      checkThat(format("device family %s address matches", expectedFamily),\
               () -> expected.equals(actual));\
     });' "$filePath" > tmp
 mv tmp "$filePath"

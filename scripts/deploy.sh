@@ -45,7 +45,7 @@ createReflectDevice() {
       --region="$GOOGLE_CLOUD_REGION" \
       --project="$GOOGLE_CLOUD_PROJECT" \
       --registry="$2" \
-      --public-key path=./sites/udmi_site_model/devices/AHU-1/rsa_public.pem,type=rsa-pem
+      --public-key path=./sites/udmi_site_model/reflector/rsa_public.pem,type=rsa-pem
 }
 
 deployFunctions "$@"
@@ -53,7 +53,7 @@ createSubscription
 createRegistry "$GOOGLE_CLOUD_REGISTRY"
 createRegistry "$UDMI_ALT_REGISTRY"
 "$script_dir"/register.sh
-createReflectRegistry "UDMS-REFLECT"
-createReflectDevice "$GOOGLE_CLOUD_REGISTRY" "UDMS-REFLECT"
-createReflectDevice "$UDMI_ALT_REGISTRY" "UDMS-REFLECT"
+createReflectRegistry "$UDMI_REFLECT_REGISTRY"
+createReflectDevice "$GOOGLE_CLOUD_REGISTRY" "$UDMI_REFLECT_REGISTRY"
+createReflectDevice "$UDMI_ALT_REGISTRY" "$UDMI_REFLECT_REGISTRY"
 deployFunctions "$@"

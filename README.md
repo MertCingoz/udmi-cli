@@ -4,9 +4,11 @@ Docker image and instructions to use [UDMI](https://github.com/faucetsdn/udmi) a
 
 #### Change variables in .env file based on your cloud
 ```
+IOT_PROVIDER=
 GOOGLE_CLOUD_PROJECT=
 GOOGLE_CLOUD_REGION=
 GOOGLE_CLOUD_REGISTRY=
+UDMI_REFLECTOR_REGISTRY=
 UDMI_ALT_REGISTRY=
 ```
 
@@ -124,3 +126,15 @@ docker-compose exec tools /bin/bash
 /scripts/logs.sh pubsub 100 MANGO-1 state
 /scripts/logs.sh pubsub 100 MANGO-1 state pointset
 ```
+
+
+#### Migration tutorial (GCP to ClearBlade)
+https://clearblade.atlassian.net/wiki/spaces/IC/pages/2207449095/Migration+tutorial
+https://github.com/ClearBlade/clearblade-iot-core-migration
+
+https://clearblade.atlassian.net/wiki/spaces/IC/pages/2210299905/Retargeting+devices
+https://clearblade.atlassian.net/wiki/spaces/IC/pages/2201059341/REST+reference
+
+### TODO
+- validator (registrar, validator, sequencer) seems not working with ClearBlade at this moment
+- Update scripts to implement IOT_PROVIDER (ClearBlade) when it is documented
