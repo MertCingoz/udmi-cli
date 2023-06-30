@@ -11,6 +11,8 @@ fi
 
 site=sites/udmi_site_model
 bin/clone_model
+mkdir -p /scripts/udmi_site_model/devices
+cp -R /scripts/udmi_site_model sites
 bin/genkeys "$site"
 bin/registrar "$site" "$GOOGLE_CLOUD_PROJECT"
 
