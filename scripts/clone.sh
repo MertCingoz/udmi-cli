@@ -43,4 +43,6 @@ sed 's/previous.before(getThreshold(now))/true/g' "$filePath" > tmp
 mv tmp "$filePath"
 
 bin/clone_model
+mkdir -p /scripts/udmi_site_model/devices
+cp -R /scripts/udmi_site_model sites
 bin/genkeys sites/udmi_site_model
