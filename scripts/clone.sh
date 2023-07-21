@@ -28,7 +28,7 @@ sed '/private void familyAddr(String family) {/,/() -> expected.equals(actual));
     expectedFamilies.forEach(expectedFamily -> {\
       String expected = catchToNull(() -> deviceMetadata.localnet.families.get(expectedFamily).addr);\
       if (expected == null) {\
-        throw new AssumptionViolatedException(\
+        throw new org.junit.AssumptionViolatedException(\
                 format("No %S address defined in metadata", expected));\
       }\
       untilTrue("localnet families available", () -> deviceState.localnet.families.size() > 0);\

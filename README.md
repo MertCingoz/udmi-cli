@@ -76,15 +76,16 @@ docker-compose exec tools /bin/bash
 #/scripts/udmi.sh sequencer MANGO-1 writeback_success
 #/scripts/udmi.sh sequencer MANGO-1 writeback_invalid
 #/scripts/udmi.sh sequencer MANGO-1 writeback_failure
-#/scripts/udmi.sh sequencer MANGO-1 valid_serial_no
-#/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_success_reconnect
 #/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_error
 #/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_retry
+#/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_success_reconnect
 #/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_bad_hash
 #/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_success_alternate
 #/scripts/udmi.sh sequencer MANGO-1 endpoint_redirect_and_restart
+#/scripts/udmi.sh sequencer MANGO-1 endpoint_failure_and_restart
 #/scripts/udmi.sh sequencer MANGO-1 system_mode_restart
 #/scripts/udmi.sh sequencer MANGO-1 system_last_update
+#/scripts/udmi.sh sequencer MANGO-1 valid_serial_no
 #/scripts/udmi.sh sequencer MANGO-1 system_min_loglevel
 #/scripts/udmi.sh sequencer MANGO-1 device_config_acked
 #/scripts/udmi.sh sequencer MANGO-1 broken_config
@@ -96,8 +97,8 @@ docker-compose exec tools /bin/bash
 #/scripts/udmi.sh sequencer MANGO-1 multi_enumeration
 #/scripts/udmi.sh sequencer MANGO-1 single_scan
 #/scripts/udmi.sh sequencer MANGO-1 periodic_scan
-#/scripts/udmi.sh sequencer MANGO-1 family_ipv6_addr
 #/scripts/udmi.sh sequencer MANGO-1 family_ether_addr
+#/scripts/udmi.sh sequencer MANGO-1 family_ipv6_addr
 #/scripts/udmi.sh sequencer MANGO-1 family_ipv4_addr
 #/scripts/udmi.sh sequencer MANGO-1 pointset_publish_interval
 #/scripts/udmi.sh sequencer MANGO-1 pointset_sample_rate
@@ -128,11 +129,10 @@ docker-compose exec tools /bin/bash
 ```
 
 #### Migration tutorial (GCP to ClearBlade)
-https://clearblade.atlassian.net/wiki/spaces/IC/pages/2207449095/Migration+tutorial
-https://github.com/ClearBlade/clearblade-iot-core-migration
-
-https://clearblade.atlassian.net/wiki/spaces/IC/pages/2210299905/Retargeting+devices
-https://clearblade.atlassian.net/wiki/spaces/IC/pages/2201059341/REST+reference
+- https://clearblade.atlassian.net/wiki/spaces/IC/pages/2207449095/Migration+tutorial
+- https://github.com/ClearBlade/clearblade-iot-core-migration
+- https://clearblade.atlassian.net/wiki/spaces/IC/pages/2210299905/Retargeting+devices
+- https://clearblade.atlassian.net/wiki/spaces/IC/pages/2201059341/REST+reference
 
 ### TODO
 - Check what needs to be done for cloud functions and reflector ? setup for ClearBlade
