@@ -8,5 +8,6 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
   procps \
   iproute2 \
   coreutils \
+  python3-venv \
   openjdk-17-jdk-headless \
   && rm -rf /var/lib/apt/lists/*

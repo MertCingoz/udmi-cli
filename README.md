@@ -101,6 +101,8 @@ docker-compose exec tools /bin/bash
 #/scripts/udmi.sh sequencer MANGO-1 family_ipv6_addr
 #/scripts/udmi.sh sequencer MANGO-1 family_ipv4_addr
 #/scripts/udmi.sh sequencer MANGO-1 pointset_publish_interval
+#/scripts/udmi.sh sequencer MANGO-1 pointset_remove_point
+#/scripts/udmi.sh sequencer MANGO-1 pointset_request_extraneous
 #/scripts/udmi.sh sequencer MANGO-1 pointset_sample_rate
 ```
 
