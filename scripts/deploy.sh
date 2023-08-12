@@ -4,20 +4,7 @@ set -o errexit -o nounset
 script_dir=$(dirname "$0")
 
 deployFunctions() {
-  if [ $# -ge 1 ]; then
-    curl -sL https://deb.nodesource.com/setup_16.x | bash -
-    apt-get update && apt-get --no-install-recommends install -y nodejs
-    npm install -g npm@latest firebase-tools
-    cd udmis/functions/
-    npm install
-    firebase login --no-localhost
-    firebase projects:list
-    firebase projects:addfirebase "$GOOGLE_CLOUD_PROJECT" || true
-    firebase use "$GOOGLE_CLOUD_PROJECT"
-    firebase deploy --only functions --project "$GOOGLE_CLOUD_PROJECT"
-  else
-    udmis/deploy_udmis_gcloud "$GOOGLE_CLOUD_PROJECT"
-  fi
+  udmis/deploy_udmis_gcloud "$GOOGLE_CLOUD_PROJECT"
 }
 
 createSubscription() {
@@ -48,7 +35,7 @@ createReflectDevice() {
       --public-key path=./sites/udmi_site_model/reflector/rsa_public.pem,type=rsa-pem
 }
 
-deployFunctions "$@"
+deployFunctions
 createSubscription
 createRegistry "$GOOGLE_CLOUD_REGISTRY"
 createRegistry "$UDMI_ALT_REGISTRY"
@@ -56,4 +43,4 @@ createRegistry "$UDMI_ALT_REGISTRY"
 createReflectRegistry "$UDMI_REFLECT_REGISTRY"
 createReflectDevice "$GOOGLE_CLOUD_REGISTRY" "$UDMI_REFLECT_REGISTRY"
 createReflectDevice "$UDMI_ALT_REGISTRY" "$UDMI_REFLECT_REGISTRY"
-deployFunctions "$@"
+deployFunctions

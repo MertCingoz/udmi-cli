@@ -33,9 +33,7 @@ docker-compose exec tools /bin/bash
 ```sh
 /scripts/configure.sh
 /scripts/deploy.sh
-#/scripts/deploy.sh --firebase
 #/scripts/clean.sh
-#/scripts/delete.sh
 ```
 
 ### [TOOLS](https://faucetsdn.github.io/udmi/docs/tools/)

@@ -15,11 +15,8 @@ gcloud pubsub subscriptions list | grep -o "projects/${GOOGLE_CLOUD_PROJECT}/sub
   gcloud pubsub subscriptions delete "$subscription"
 done
 
-"$script_dir"/unregister.sh "$GOOGLE_CLOUD_REGISTRY"
-"$script_dir"/unregister.sh "$UDMI_ALT_REGISTRY"
-"$script_dir"/unregister.sh "$UDMI_REFLECT_REGISTRY"
-
 gcloud iot registries list --region="$GOOGLE_CLOUD_REGION" | tail -n +2 | awk '{ print $1 }' | \
 grep -x -e "$GOOGLE_CLOUD_REGISTRY" -e "$UDMI_ALT_REGISTRY" -e "$UDMI_REFLECT_REGISTRY" | while read -r registry; do
+  "$script_dir"/unregister.sh "$registry"
   echo 'Y' | gcloud iot registries delete "$registry" --region="$GOOGLE_CLOUD_REGION"
 done

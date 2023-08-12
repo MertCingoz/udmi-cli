@@ -22,7 +22,3 @@ mkdir -p "$alternate"
 cp -r "$site"/* "$alternate"
 cat <<< "$(jq ".registry_id = \"$UDMI_ALT_REGISTRY\"" "$alternate"/cloud_iot_config.json)" > "$alternate"/cloud_iot_config.json
 bin/registrar "$alternate" "$GOOGLE_CLOUD_PROJECT"
-
-#bin/sequencer "$site" "$GOOGLE_CLOUD_PROJECT" AHU-1 123 no_valid_test || true
-#validator/bin/registrar /tmp/validator_config.json
-#validator/bin/registrar /tmp/validator_config.json -a

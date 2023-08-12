@@ -8,20 +8,15 @@ if [ "$1" = "functions" ]; then
     gcloud functions logs read --limit="$2"
   fi
 elif [ "$1" = "pubsub" ]; then
-  if [ $# -ge 5 ]; then
-    gcloud pubsub subscriptions pull udmi_target_subscription \
-      --format="yaml(message.publishTime, message.attributes, message.data.decode(\"base64\").decode(\"utf-8\"))" \
-      --limit="$2" \
-      --filter="message.attributes.deviceId=$3 AND message.attributes.subType=$4 AND message.attributes.subFolder=$5"
-  elif [ $# -ge 4 ]; then
-    gcloud pubsub subscriptions pull udmi_target_subscription \
-        --format="yaml(message.publishTime, message.attributes, message.data.decode(\"base64\").decode(\"utf-8\"))" \
-        --limit="$2" \
-        --filter="message.attributes.deviceId=$3 AND message.attributes.subType=$4"
-  else
-    gcloud pubsub subscriptions pull udmi_target_subscription \
-        --format="yaml(message.publishTime, message.attributes, message.data.decode(\"base64\").decode(\"utf-8\"))" \
-        --limit="$2" \
-        --filter="message.attributes.deviceId=$3"
+  filter="message.attributes.deviceId=$3"
+  if [ $# -ge 4 ]; then
+    filter="$filter AND message.attributes.subType=$4"
+    if [ $# -ge 5 ]; then
+      filter="$filter AND message.attributes.subFolder=$5"
+    fi
   fi
+  gcloud pubsub subscriptions pull udmi_target_subscription \
+    --format="yaml(message.publishTime, message.attributes, message.data.decode(\"base64\").decode(\"utf-8\"))" \
+    --limit="$2" \
+    --filter="$filter"
 fi
