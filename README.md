@@ -71,37 +71,41 @@ docker-compose exec tools /bin/bash
 #/scripts/udmi.sh sequencer AHU-1 broken_config
 
 /scripts/udmi.sh sequencer -a MANGO-1
-#/scripts/udmi.sh sequencer MANGO-1 writeback_success
-#/scripts/udmi.sh sequencer MANGO-1 writeback_invalid
-#/scripts/udmi.sh sequencer MANGO-1 writeback_failure
+#/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_bad_hash
 #/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_error
 #/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_retry
-#/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_success_reconnect
-#/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_bad_hash
 #/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_success_alternate
-#/scripts/udmi.sh sequencer MANGO-1 endpoint_redirect_and_restart
+#/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_success_reconnect
 #/scripts/udmi.sh sequencer MANGO-1 endpoint_failure_and_restart
+#/scripts/udmi.sh sequencer MANGO-1 endpoint_redirect_and_restart
 #/scripts/udmi.sh sequencer MANGO-1 system_mode_restart
-#/scripts/udmi.sh sequencer MANGO-1 system_last_update
-#/scripts/udmi.sh sequencer MANGO-1 valid_serial_no
-#/scripts/udmi.sh sequencer MANGO-1 system_min_loglevel
-#/scripts/udmi.sh sequencer MANGO-1 device_config_acked
 #/scripts/udmi.sh sequencer MANGO-1 broken_config
+#/scripts/udmi.sh sequencer MANGO-1 config_logging
+#/scripts/udmi.sh sequencer MANGO-1 device_config_acked
 #/scripts/udmi.sh sequencer MANGO-1 extra_config
+#/scripts/udmi.sh sequencer MANGO-1 system_last_update
+#/scripts/udmi.sh sequencer MANGO-1 system_min_loglevel
+#/scripts/udmi.sh sequencer MANGO-1 valid_serial_no
 #/scripts/udmi.sh sequencer MANGO-1 empty_enumeration
-#/scripts/udmi.sh sequencer MANGO-1 pointset_enumeration
-#/scripts/udmi.sh sequencer MANGO-1 feature_enumeration
 #/scripts/udmi.sh sequencer MANGO-1 family_enumeration
+#/scripts/udmi.sh sequencer MANGO-1 feature_enumeration
 #/scripts/udmi.sh sequencer MANGO-1 multi_enumeration
-#/scripts/udmi.sh sequencer MANGO-1 single_scan
 #/scripts/udmi.sh sequencer MANGO-1 periodic_scan
+#/scripts/udmi.sh sequencer MANGO-1 pointset_enumeration
+#/scripts/udmi.sh sequencer MANGO-1 single_scan
 #/scripts/udmi.sh sequencer MANGO-1 family_ether_addr
-#/scripts/udmi.sh sequencer MANGO-1 family_ipv6_addr
 #/scripts/udmi.sh sequencer MANGO-1 family_ipv4_addr
+#/scripts/udmi.sh sequencer MANGO-1 family_ipv6_addr
+#/scripts/udmi.sh sequencer MANGO-1 pointset_publish
 #/scripts/udmi.sh sequencer MANGO-1 pointset_publish_interval
 #/scripts/udmi.sh sequencer MANGO-1 pointset_remove_point
 #/scripts/udmi.sh sequencer MANGO-1 pointset_request_extraneous
 #/scripts/udmi.sh sequencer MANGO-1 pointset_sample_rate
+#/scripts/udmi.sh sequencer MANGO-1 state_make_model
+#/scripts/udmi.sh sequencer MANGO-1 state_software
+#/scripts/udmi.sh sequencer MANGO-1 writeback_failure
+#/scripts/udmi.sh sequencer MANGO-1 writeback_invalid
+#/scripts/udmi.sh sequencer MANGO-1 writeback_success
 ```
 
 #### Kill hanging pubber, validator or sequencer processes
