@@ -8,7 +8,7 @@ deployFunctions() {
 }
 
 createSubscription() {
-  gcloud pubsub subscriptions create udmi_target_subscription --topic=udmi_target
+  gcloud pubsub subscriptions create "$1" --topic=udmi_target
 }
 
 createRegistry() {
@@ -36,7 +36,7 @@ createReflectDevice() {
 }
 
 deployFunctions
-createSubscription
+createSubscription "$UDMI_PUBSUB"
 createRegistry "$GOOGLE_CLOUD_REGISTRY"
 createRegistry "$UDMI_ALT_REGISTRY"
 "$script_dir"/register.sh

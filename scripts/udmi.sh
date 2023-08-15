@@ -10,7 +10,7 @@ elif [ "$1" = "pubber" ]; then
       bin/pubber sites/udmi_site_model "$GOOGLE_CLOUD_PROJECT" "$2" "$2"
     fi
 elif [ "$1" = "validator" ]; then
-  bin/validator sites/udmi_site_model "$GOOGLE_CLOUD_PROJECT" udmi_target_subscription
+  bin/validator sites/udmi_site_model "$GOOGLE_CLOUD_PROJECT" "$UDMI_PUBSUB"
 elif [ "$1" = "sequencer" ]; then
   if [ "$2" = "-a" ]; then
     bin/sequencer -a -vv sites/udmi_site_model "$GOOGLE_CLOUD_PROJECT" "$3" "$3"

@@ -15,7 +15,7 @@ elif [ "$1" = "pubsub" ]; then
       filter="$filter AND message.attributes.subFolder=$5"
     fi
   fi
-  gcloud pubsub subscriptions pull udmi_target_subscription \
+  gcloud pubsub subscriptions pull "$UDMI_PUBSUB" \
     --format="yaml(message.publishTime, message.attributes, message.data.decode(\"base64\").decode(\"utf-8\"))" \
     --limit="$2" \
     --filter="$filter"
