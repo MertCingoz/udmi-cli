@@ -20,7 +20,7 @@ services:
         target: /scripts
     environment:
       UDMI_TAG: master
-      UDMI_VERSION: 1d8f049b #Aug 9, 2023
+      UDMI_VERSION: 9fcc4c94 #Aug 14, 2023
       IOT_PROVIDER: ${IOT_PROVIDER}
       GOOGLE_CLOUD_PROJECT: ${GOOGLE_CLOUD_PROJECT}
       GOOGLE_CLOUD_REGION: ${GOOGLE_CLOUD_REGION}
