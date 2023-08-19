@@ -5,8 +5,7 @@ git clone --branch "$UDMI_TAG" https://github.com/faucetsdn/udmi.git . || true
 git checkout --detach "$UDMI_VERSION"
 
 filePath=validator/src/main/java/com/google/daq/mqtt/validator/ReportingDevice.java
-sed 's/previous.before(getThreshold(now))/true/g' "$filePath" > tmp
-mv tmp "$filePath"
+sed 's/previous.before(getThreshold(now))/true/g' "$filePath" | sponge "$filePath"
 
 bin/clone_model
 mkdir -p /scripts/udmi_site_model/devices

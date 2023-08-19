@@ -20,5 +20,5 @@ alternate="$site"_alternate
 rm -rf "$alternate"
 mkdir -p "$alternate"
 cp -r "$site"/* "$alternate"
-cat <<< "$(jq ".registry_id = \"$UDMI_ALT_REGISTRY\"" "$alternate"/cloud_iot_config.json)" > "$alternate"/cloud_iot_config.json
+cat <<< "$(jq ".registry_id = \"$UDMI_ALT_REGISTRY\"" "$alternate"/cloud_iot_config.json)" | sponge "$alternate"/cloud_iot_config.json
 bin/registrar "$alternate" "$GOOGLE_CLOUD_PROJECT"
