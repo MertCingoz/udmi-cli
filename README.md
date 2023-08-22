@@ -32,7 +32,7 @@ docker-compose exec tools /bin/bash
 #### Configure gcloud account and deploy required cloud resources 
 ```sh
 /scripts/configure.sh
-/scripts/deploy.sh
+#/scripts/deploy.sh
 #/scripts/clean.sh
 ```
 
