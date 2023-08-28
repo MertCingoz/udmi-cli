@@ -2,9 +2,13 @@ version: "3.9"
 services:
 
   tools:
-    build: .
+    build:
+      context: .
+      x-bake:
+        platforms:
+          - linux/amd64
+          - linux/arm64
     image: mertcingoz/udmi-cli
-    platform: linux/amd64
     stdin_open: true
     tty: true
     working_dir: /app
@@ -20,7 +24,7 @@ services:
         target: /scripts
     environment:
       UDMI_TAG: master
-      UDMI_VERSION: 6df11b33 #Aug 22, 2023
+      UDMI_VERSION: a2243f91 #Aug 27, 2023
       IOT_PROVIDER: ${IOT_PROVIDER}
       GOOGLE_CLOUD_PROJECT: ${GOOGLE_CLOUD_PROJECT}
       GOOGLE_CLOUD_REGION: ${GOOGLE_CLOUD_REGION}

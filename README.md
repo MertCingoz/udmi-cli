@@ -66,11 +66,11 @@ docker-compose exec tools /bin/bash
 
 #### Sequencer
 ```sh
-/scripts/udmi.sh sequencer -a AHU-1
+/scripts/udmi.sh sequencer AHU-1 -a
 #/scripts/udmi.sh sequencer AHU-1
 #/scripts/udmi.sh sequencer AHU-1 broken_config
 
-/scripts/udmi.sh sequencer -a MANGO-1
+/scripts/udmi.sh sequencer MANGO-1 -a
 #/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_bad_hash
 #/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_error
 #/scripts/udmi.sh sequencer MANGO-1 endpoint_connection_retry
