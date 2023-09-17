@@ -1,14 +1,5 @@
-FROM google/cloud-sdk:slim
+FROM gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine
 
 WORKDIR /app
 
-RUN apt-get update && apt-get --no-install-recommends install -y \
-  jq \
-  git \
-  procps \
-  iproute2 \
-  coreutils \
-  moreutils \
-  python3-venv \
-  openjdk-17-jdk-headless \
-  && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache jq moreutils openjdk17

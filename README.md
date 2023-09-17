@@ -17,8 +17,7 @@ UDMI_ALT_REGISTRY=
 ```sh
 mkdir -p ~/.config
 mkdir -p udmi
-docker-compose pull
-docker-compose up -d --no-build
+docker-compose up -d --no-build --pull=always
 docker-compose exec tools /bin/bash
 ```
 
