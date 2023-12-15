@@ -22,6 +22,7 @@ docker-compose exec tools /bin/bash
 
 ```sh
 udmi clone
+
 udmi registrar 
 udmi device AHU-1
 udmi device AHU-1 serial-1234

@@ -1,13 +1,22 @@
 #!/bin/bash -e
 set -o errexit -o nounset
 
-config="/udmi/sites/$UDMI_REGISTRY/udmi/cloud_iot_config.json"
+app=/udmi
+bin="$app"/bin
+site="$app"/sites/"$UDMI_REGISTRY"
+config="$site"/udmi/cloud_iot_config.json
+
 if [ "$1" = "clone" ]; then
-  git clone "$UDMI_REPO" /udmi || true
-  git checkout --detach "$UDMI_VERSION"
-  git clone "$UDMI_MODEL_REPO" /udmi/sites
+  git clone "$UDMI_REPO" "$app" || true
+  git -C "$app" remote add upstream https://github.com/faucetsdn/udmi.git || true
+  git -C "$app" fetch upstream
+  git -C "$app" checkout --detach "$UDMI_VERSION"
+  mkdir -p "$site"
+  git clone "$UDMI_MODEL_REPO" "$site" || true
+  git -C "$site" fetch
+  git -C "$site" pull
 elif [ "$1" = "registrar" ]; then
-  /udmi/bin/registrar "$config"
+  "$bin"/registrar "$config"
 elif [ "$1" = "device" ]; then
   if [ $# -ge 2 ]; then
     jq ".device_id = \"$2\"" "$config" | sponge "$config"
@@ -22,21 +31,22 @@ elif [ "$1" = "device" ]; then
   fi
 elif [ "$1" = "pubber" ]; then
   if [ $# -ge 2 ]; then
-    /udmi/bin/pubber "$config" "$2"
+    shift 1
+    "$bin"/pubber "$config" "$@"
   else
-    /udmi/bin/pubber "$config"
+    "$bin"/pubber "$config"
   fi
 elif [ "$1" = "validator" ]; then
-  /udmi/bin/validator "$config"
+  "$bin"/validator "$config"
 elif [ "$1" = "sequencer" ]; then
-  ln -sf /venv /udmi/venv
+  ln -sf /venv "$app"/venv
   if [ $# -ge 2 ]; then
     if [ "$2" = "-a" ]; then
-      /udmi/bin/sequencer -a -vv "$config"
+      "$bin"/sequencer -a -vv "$config"
     else
-      /udmi/bin/sequencer -vv "$config" "$2"
+      "$bin"/sequencer -vv "$config" "$2"
     fi
   else
-    /udmi/bin/sequencer -vv "$config"
+    "$bin"/sequencer -vv "$config"
   fi
 fi
