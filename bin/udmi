@@ -1,0 +1,42 @@
+#!/bin/bash -e
+set -o errexit -o nounset
+
+config="/udmi/sites/$UDMI_REGISTRY/udmi/cloud_iot_config.json"
+if [ "$1" = "clone" ]; then
+  git clone "$UDMI_REPO" /udmi || true
+  git checkout --detach "$UDMI_VERSION"
+  git clone "$UDMI_MODEL_REPO" /udmi/sites
+elif [ "$1" = "registrar" ]; then
+  /udmi/bin/registrar "$config"
+elif [ "$1" = "device" ]; then
+  if [ $# -ge 2 ]; then
+    jq ".device_id = \"$2\"" "$config" | sponge "$config"
+    cloud_region=$(jq -r '.cloud_region' "$config")
+    registry_id=$(jq -r '.registry_id' "$config")
+    project_id=$(jq -r '.project_id' "$config")
+    client_id="projects/$project_id/locations/$cloud_region/registries/$registry_id/devices/$2"
+    jq ".device_endpoint.client_id = \"$client_id\"" "$config" | sponge "$config"
+  fi
+  if [ $# -ge 3 ]; then
+    jq ".serial_no = \"$3\"" "$config" | sponge "$config"
+  fi
+elif [ "$1" = "pubber" ]; then
+  if [ $# -ge 2 ]; then
+    /udmi/bin/pubber "$config" "$2"
+  else
+    /udmi/bin/pubber "$config"
+  fi
+elif [ "$1" = "validator" ]; then
+  /udmi/bin/validator "$config"
+elif [ "$1" = "sequencer" ]; then
+  ln -sf /venv /udmi/venv
+  if [ $# -ge 2 ]; then
+    if [ "$2" = "-a" ]; then
+      /udmi/bin/sequencer -a -vv "$config"
+    else
+      /udmi/bin/sequencer -vv "$config" "$2"
+    fi
+  else
+    /udmi/bin/sequencer -vv "$config"
+  fi
+fi

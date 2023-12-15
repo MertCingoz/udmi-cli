@@ -11,24 +11,12 @@ services:
     image: mertcingoz/udmi-cli
     stdin_open: true
     tty: true
-    working_dir: /app
+    working_dir: /udmi
+    env_file: .env
     volumes:
       - type: bind
         source: udmi
-        target: /app
+        target: /udmi
       - type: bind
-        source: ~/.config
-        target: /root/.config
-      - type: bind
-        source: scripts
-        target: /scripts
-    environment:
-      UDMI_REPO: ${UDMI_REPO}
-      UDMI_VERSION: ${UDMI_VERSION}
-      IOT_PROVIDER: ${IOT_PROVIDER}
-      GOOGLE_CLOUD_PROJECT: ${GOOGLE_CLOUD_PROJECT}
-      GOOGLE_CLOUD_REGION: ${GOOGLE_CLOUD_REGION}
-      GOOGLE_CLOUD_REGISTRY: ${GOOGLE_CLOUD_REGISTRY}
-      UDMI_REFLECT_REGISTRY: ${UDMI_REFLECT_REGISTRY}
-      UDMI_ALT_REGISTRY: ${UDMI_ALT_REGISTRY}
-      UDMI_PUBSUB: ${UDMI_PUBSUB}
+        source: ~/.ssh
+        target: /root/.ssh

@@ -1,10 +1,10 @@
 /.idea
-/learning
 /udmi
+/testrun
 
 /gradle
 /.gradle
 /settings.gradle
 /gradlew.bat
 /gradlew
-/scripts/udmi_site_model
+.DS_Store
