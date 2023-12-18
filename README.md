@@ -24,11 +24,16 @@ docker-compose exec tools /bin/bash
 udmi clone
 
 udmi registrar 
+
 udmi device AHU-1
 udmi device AHU-1 serial-1234
+
 udmi pubber
 udmi pubber badVersion
+udmi pubber badVersion noState ...
+
 udmi sequencer
 udmi sequencer -a
 udmi sequencer broken_config
+udmi sequencer broken_config single_scan ...
 ```

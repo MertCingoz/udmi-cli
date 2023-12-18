@@ -6,7 +6,7 @@ bin="$app"/bin
 site="$app"/sites/"$UDMI_REGISTRY"
 config="$site"/udmi/cloud_iot_config.json
 
-if [ "$1" = "clone" ]; then
+if [ "$1" = "clone" ] || [ "$1" = "c" ]; then
   git clone "$UDMI_REPO" "$app" || true
   git -C "$app" remote add upstream https://github.com/faucetsdn/udmi.git || true
   git -C "$app" fetch upstream
@@ -15,9 +15,9 @@ if [ "$1" = "clone" ]; then
   git clone "$UDMI_MODEL_REPO" "$site" || true
   git -C "$site" fetch
   git -C "$site" pull
-elif [ "$1" = "registrar" ]; then
+elif [ "$1" = "registrar" ] || [ "$1" = "r" ]; then
   "$bin"/registrar "$config"
-elif [ "$1" = "device" ]; then
+elif [ "$1" = "device" ] || [ "$1" = "d" ]; then
   if [ $# -ge 2 ]; then
     jq ".device_id = \"$2\"" "$config" | sponge "$config"
     cloud_region=$(jq -r '.cloud_region' "$config")
@@ -29,22 +29,23 @@ elif [ "$1" = "device" ]; then
   if [ $# -ge 3 ]; then
     jq ".serial_no = \"$3\"" "$config" | sponge "$config"
   fi
-elif [ "$1" = "pubber" ]; then
+elif [ "$1" = "pubber" ] || [ "$1" = "p" ]; then
   if [ $# -ge 2 ]; then
     shift 1
     "$bin"/pubber "$config" "$@"
   else
     "$bin"/pubber "$config"
   fi
-elif [ "$1" = "validator" ]; then
+elif [ "$1" = "validator" ] || [ "$1" = "v" ]; then
   "$bin"/validator "$config"
-elif [ "$1" = "sequencer" ]; then
+elif [ "$1" = "sequencer" ] || [ "$1" = "s" ]; then
   ln -sf /venv "$app"/venv
   if [ $# -ge 2 ]; then
     if [ "$2" = "-a" ]; then
       "$bin"/sequencer -a -vv "$config"
     else
-      "$bin"/sequencer -vv "$config" "$2"
+      shift 1
+      "$bin"/sequencer -vv "$config" "$@"
     fi
   else
     "$bin"/sequencer -vv "$config"
