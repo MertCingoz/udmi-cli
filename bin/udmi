@@ -4,7 +4,7 @@ set -o errexit -o nounset
 app=/udmi
 bin="$app"/bin
 site="$app"/sites/"$UDMI_REGISTRY"
-config="$site"/udmi/cloud_iot_config.json
+config="$site"/cloud_iot_config.json
 
 if [ "$1" = "clone" ] || [ "$1" = "c" ]; then
   git clone "$UDMI_REPO" "$app" || true
