@@ -9,7 +9,8 @@ config="$site"/cloud_iot_config.json
 if [ "$1" = "clone" ] || [ "$1" = "c" ]; then
   git clone "$UDMI_REPO" "$app" || true
   git -C "$app" remote add upstream https://github.com/faucetsdn/udmi.git || true
-  git -C "$app" fetch upstream
+  git -C "$app" fetch upstream --tags --force
+  #git -C "$app" push --tags
   git -C "$app" checkout --detach "$UDMI_VERSION"
   mkdir -p "$site"
   git clone "$UDMI_MODEL_REPO" "$site" || true
@@ -50,4 +51,36 @@ elif [ "$1" = "sequencer" ] || [ "$1" = "s" ]; then
   else
     "$bin"/sequencer -vv "$config"
   fi
+elif [ "$1" = "--" ]; then
+  udmi r
+  for d in "$site"/devices/* ; do
+    auth_type=$(jq -r '.cloud.auth_type' "$d/metadata.json")
+    if [ "$auth_type" != null ]; then
+      model=$(jq -r '.system.hardware.model' "$d/metadata.json")
+      if [ $# -ge 2 ] && [ "$2" != "$model" ]; then
+        continue
+      fi
+      udmi - $(basename "$d")
+    fi
+  done
+elif [ "$1" = "-" ]; then
+  if [ $# -ge 2 ]; then
+    shift 1
+    udmi d "$@"
+    deviceId="$1"
+  else
+    deviceId=$(jq -r '.device_id' "$config")
+  fi
+  model=$(jq -r '.system.hardware.model' "$site/devices/$deviceId/metadata.json")
+  if [ "$model" = "pubber" ]; then
+    udmi p &> /dev/null &
+    PUB_PID=$!
+    trap "kill ${PUB_PID}" EXIT
+  fi
+  udmi s -a
+  jq -r '.gateway.proxy_ids | .[]?' "$site/devices/$deviceId/metadata.json" |
+  while read proxy; do
+    udmi d "$proxy"
+    udmi s -a
+  done
 fi
