@@ -75,7 +75,7 @@ elif [ "$1" = "-" ]; then
   if [ "$model" = "pubber" ]; then
     udmi p &> /dev/null &
     PUB_PID=$!
-    trap "kill ${PUB_PID}" EXIT
+    trap "pkill -P ${PUB_PID}" EXIT INT TERM
   fi
   udmi s -a
   jq -r '.gateway.proxy_ids | .[]?' "$site/devices/$deviceId/metadata.json" |
