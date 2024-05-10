@@ -1,5 +1,5 @@
 /.idea
-/udmi
+/udmi*
 /testrun
 
 /gradle
